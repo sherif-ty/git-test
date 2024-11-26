@@ -1,0 +1,8 @@
+#Build the Docker images:
+docker-compose build
+
+#Run the Selenium test:
+docker-compose up
+
+
+
