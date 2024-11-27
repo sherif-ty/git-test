@@ -1,14 +1,17 @@
-# Use Maven with OpenJDK for building the project
-FROM maven:3.8.4-openjdk-11-slim as build
+# Use a Java-based image
+FROM maven:3.8.4-openjdk-11-slim
 
-# Set the working directory inside the container
+# Set working directory to /app
 WORKDIR /app
 
-# Copy the entire project into the container
-COPY . /app
+# Copy the pom.xml to the container
+COPY pom.xml /app/pom.xml
 
-# Run Maven to build the project (downloads dependencies, compiles, and runs tests)
+# Copy the test directory containing the test files
+COPY test /app/test
+
+# Run mvn clean install to install dependencies
 RUN mvn clean install
 
-# Run the tests (after the Maven build completes)
+# Run tests
 CMD ["mvn", "test"]
