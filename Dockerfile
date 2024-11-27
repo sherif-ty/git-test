@@ -7,7 +7,7 @@ WORKDIR /app
 
 
 # Install necessary tools for downloading files and compiling Java
-RUN apk update && apk add --no-cache curl bash
+
 
 # Download Selenium Java JARs
 RUN curl -O https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-java/4.13.0/selenium-java-4.13.0.jar
