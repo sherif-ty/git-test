@@ -13,7 +13,7 @@ COPY selenium-api-4.13.0.jar /app/selenium-api-4.13.0.jar
 COPY test /app/test
 
 # Run Maven to install dependencies and build the project
-RUN mvn clean install
+RUN mvn install
 
 # Command to run the test
 CMD ["java", "-cp", ".:/app/selenium-java-4.13.0.jar:/app/selenium-api-4.13.0.jar", "test.TestSelenium"]
