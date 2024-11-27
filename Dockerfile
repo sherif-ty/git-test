@@ -1,19 +1,29 @@
-# Use the official Maven image with OpenJDK 11 as the base image
-FROM maven:3.8.6-openjdk-11-slim
+# Use an official Gradle image as the base image
+FROM gradle:7.6-jdk11 as builder
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the pom.xml and the selenium JAR files
-COPY pom.xml /app/pom.xml
-COPY selenium-java-4.13.0.jar /app/selenium-java-4.13.0.jar
-COPY selenium-api-4.13.0.jar /app/selenium-api-4.13.0.jar
+# Copy the Gradle wrapper and build files
+COPY gradlew /app/gradlew
+COPY gradle /app/gradle
+COPY build.gradle /app/build.gradle
+COPY settings.gradle /app/settings.gradle
+COPY src /app/src
 
-# Copy the source code
-COPY test /app/test
+# Give execution permissions to gradlew
+RUN chmod +x /app/gradlew
 
-# Run Maven to install dependencies and build the project
-RUN mvn install
+# Run Gradle build
+RUN ./gradlew clean build --no-daemon
 
-# Command to run the test
-CMD ["java", "-cp", ".:/app/selenium-java-4.13.0.jar:/app/selenium-api-4.13.0.jar", "test.TestSelenium"]
+# Use a smaller image to run the application
+FROM openjdk:11-jre-slim
+
+WORKDIR /app
+
+# Copy the compiled build from the builder image
+COPY --from=builder /app/build/libs/java-selenium-project-1.0-SNAPSHOT.jar /app/java-selenium-project.jar
+
+# Set the entry point
+ENTRYPOINT ["java", "-jar", "java-selenium-project.jar"]
