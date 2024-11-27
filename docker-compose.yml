@@ -32,4 +32,4 @@ services:
       echo 'Waiting for Selenium Hub...';
       sleep 2;
       done;
-      java $JAVA_OPTS -cp .:TestSelenium.jar test.TestSelenium"
+      java $JAVA_OPTS -cp .:java-selenium-project.jar test.TestSelenium"
