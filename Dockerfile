@@ -5,7 +5,7 @@ FROM openjdk:11
 WORKDIR /app
 
 # Install curl and other necessary tools
-RUN apt-get update && apt-get install -y curl
+#RUN apt-get update && apt-get install -y curl
 
 # Download the necessary Selenium JARs using curl
 RUN curl -o /app/selenium-java-4.13.0.jar https://repo.maven.apache.org/maven2/org/seleniumhq/selenium/selenium-java/4.13.0/selenium-java-4.13.0.jar
