@@ -1,4 +1,4 @@
-=FROM gradle:7.6-jdk11 as builder
+FROM gradle:7.6-jdk11 as builder
 
 # Set the working directory
 WORKDIR /app
