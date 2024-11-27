@@ -5,11 +5,11 @@ FROM openjdk:11-slim
 WORKDIR /app
 
 # Install necessary tools
-RUN  apt-get install -y wget 
+#RUN  apt-get install -y wget 
 
 # Download Selenium Java JARs
-RUN wget -q https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-java/4.13.0/selenium-java-4.13.0.jar
-RUN wget -q https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-api/4.13.0/selenium-api-4.13.0.jar
+RUN curl https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-java/4.13.0/selenium-java-4.13.0.jar
+RUN curl https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-api/4.13.0/selenium-api-4.13.0.jar
 
 # Copy test file
 COPY TestSelenium.java .
