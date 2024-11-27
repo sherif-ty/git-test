@@ -17,13 +17,14 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
 
-  test-runner:
-    build:
-      context: .
-    depends_on:
-      - selenium-hub
-      - chrome-node
-    environment:
-      - JAVA_OPTS=-Dwebdriver.chrome.driver=/usr/bin/chromedriver
-    dns:
-      - 8.8.8.8
+test-runner:
+  build:
+    context: .
+  depends_on:
+    - chrome-node
+  environment:
+    - JAVA_OPTS=-Dwebdriver.chrome.driver=/usr/bin/chromedriver
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+
