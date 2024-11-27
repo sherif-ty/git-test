@@ -1,5 +1,5 @@
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -10,8 +10,10 @@ public class TestSelenium {
         try {
             // Set up RemoteWebDriver to connect to the Selenium Hub
             URL seleniumHubUrl = new URL("http://selenium-hub:4444/wd/hub");
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            WebDriver driver = new RemoteWebDriver(seleniumHubUrl, capabilities);
+
+            // Use ChromeOptions in Selenium 4
+            ChromeOptions options = new ChromeOptions();
+            WebDriver driver = new RemoteWebDriver(seleniumHubUrl, options);
 
             // Run the test
             driver.get("https://www.google.com");
@@ -24,4 +26,3 @@ public class TestSelenium {
         }
     }
 }
-
