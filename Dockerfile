@@ -1,25 +1,21 @@
-FROM gradle:7.6-jdk11 as builder
+FROM maven:3.8.6-openjdk-11-slim as builder
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy Gradle wrapper files and build files
-COPY gradlew /app/gradlew
-COPY gradle /app/gradle
-COPY build.gradle /app/build.gradle
-COPY settings.gradle /app/settings.gradle
-COPY src /app/src  # Ensure 'src' exists in your local directory
+# Copy the Maven project files (pom.xml, src/)
+COPY pom.xml /app/
+COPY src /app/src
 
-RUN chmod +x /app/gradlew
-
-RUN ./gradlew clean build --no-daemon
+# Install dependencies and build the project
+RUN mvn clean install -DskipTests
 
 FROM openjdk:11-jre-slim
 
 WORKDIR /app
 
-# Copy the compiled build from the builder image
-COPY --from=builder /app/build/libs/java-selenium-project-1.0-SNAPSHOT.jar /app/java-selenium-project.jar
+# Copy the compiled .jar file from the builder image
+COPY --from=builder /app/target/java-selenium-project-1.0-SNAPSHOT.jar /app/java-selenium-project.jar
 
-# Set the entry point
+# Set the entry point to run the application
 ENTRYPOINT ["java", "-jar", "java-selenium-project.jar"]
