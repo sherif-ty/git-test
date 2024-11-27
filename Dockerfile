@@ -11,10 +11,6 @@ COPY test /app/test/
 # Install dependencies and build the project (skip tests for faster build)
 RUN mvn clean install -DskipTests
 
-# Stage 2: Run the compiled .jar file
-FROM openjdk:11-jre-slim
-
-WORKDIR /app
 
 # Copy the compiled .jar file from the builder image to the new image
 COPY --from=builder /app/target/java-selenium-project-1.0-SNAPSHOT.jar /app/java-selenium-project.jar
