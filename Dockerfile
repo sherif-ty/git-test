@@ -5,7 +5,7 @@ FROM openjdk:11-jdk-alpine
 WORKDIR /app
 
 # Install necessary tools
-RUN  apt-get update && apt-get install -y curl
+#RUN  apt-get update && apt-get install -y curl
  
 
 # Download Selenium Java JARs
