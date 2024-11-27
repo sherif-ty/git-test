@@ -8,7 +8,7 @@ WORKDIR /app
 COPY test /app/test
 
 # Install curl and bash if needed
-RUN apt-get update && apt-get install -y curl bash
+#RUN apt-get update && apt-get install -y curl bash
 
 # Set environment variable for Selenium WebDriver path
 ENV WEBDRIVER_PATH=/usr/bin/chromedriver
