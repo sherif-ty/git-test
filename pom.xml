@@ -5,17 +5,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
+<<<<<<< HEAD
     <artifactId>selenium-test</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <!-- Selenium dependency -->
+=======
+    <artifactId>java-selenium-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Selenium Java dependency -->
+>>>>>>> 2d697d8ab228a7438431fb0402182f36b29e82d4
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.13.0</version>
         </dependency>
 
+<<<<<<< HEAD
         <!-- JUnit for test cases (optional if you're using JUnit for running tests) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -25,10 +35,33 @@
         </dependency>
 
         <!-- You can add more dependencies as needed -->
+=======
+        <!-- WebDriver Manager to automatically download drivers (like ChromeDriver) -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+
+        <!-- JUnit 5 dependency for running tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+>>>>>>> 2d697d8ab228a7438431fb0402182f36b29e82d4
     </dependencies>
 
     <build>
         <plugins>
+<<<<<<< HEAD
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -40,4 +73,23 @@
             </plugin>
         </plugins>
     </build>
+=======
+            <!-- Plugin to run tests with Maven -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <!-- Repository for Selenium and WebDriver dependencies -->
+        <repository>
+            <id>selenium</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
+
+>>>>>>> 2d697d8ab228a7438431fb0402182f36b29e82d4
 </project>

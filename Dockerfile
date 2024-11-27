@@ -1,14 +1,21 @@
-# Use Maven with OpenJDK for building the project
-FROM maven:3.8.4-openjdk-11-slim as build
+# Use OpenJDK (Debian-based) as the base image
+FROM openjdk:11
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the Maven project files into the container
-COPY . /app
+# Install curl and other necessary tools
+#RUN apt-get update && apt-get install -y curl
 
-# Build the project (which will download Selenium dependencies)
-RUN mvn clean install
+# Download the necessary Selenium JARs using curl
+RUN curl -o /app/selenium-java-4.13.0.jar https://repo.maven.apache.org/maven2/org/seleniumhq/selenium/selenium-java/4.13.0/selenium-java-4.13.0.jar
+RUN curl -o /app/selenium-api-4.13.0.jar https://repo.maven.apache.org/maven2/org/seleniumhq/selenium/selenium-api/4.13.0/selenium-api-4.13.0.jar
 
-# Run the tests (after the Maven build completes)
-CMD ["mvn", "test"]
+# Copy the test files into the container
+COPY test /app/test
+
+# Compile Java test files
+RUN javac -cp ".:/app/selenium-java-4.13.0.jar:/app/selenium-api-4.13.0.jar" /app/test/TestSelenium.java
+
+# Command to run the test
+CMD ["java", "-cp", ".:/app/selenium-java-4.13.0.jar:/app/selenium-api-4.13.0.jar", "test.TestSelenium"]
