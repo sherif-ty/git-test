@@ -4,6 +4,9 @@ FROM openjdk:11
 # Set the working directory
 WORKDIR /app
 
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
 # Copy pom.xml and selenium JARs
 COPY pom.xml /app/pom.xml
 COPY selenium-java-4.13.0.jar /app/selenium-java-4.13.0.jar
