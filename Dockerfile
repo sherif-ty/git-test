@@ -5,7 +5,7 @@ FROM openjdk:11-slim
 WORKDIR /app
 
 # Install necessary tools
-RUN apt-get update && apt-get install -y wget unzip
+RUN apt-get update && apt-get install -y wget 
 
 # Download Selenium Java JARs
 RUN wget -q https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-java/4.13.0/selenium-java-4.13.0.jar
