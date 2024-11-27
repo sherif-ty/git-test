@@ -6,7 +6,6 @@ services:
     container_name: selenium-hub
     ports:
       - "4444:4444"
- 
 
   chrome-node:
     image: selenium/node-chrome:4.13.0
@@ -17,14 +16,20 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-   
 
   test-runner:
     build:
       context: .
     depends_on:
+      - selenium-hub
       - chrome-node
     environment:
       - JAVA_OPTS=-Dwebdriver.chrome.driver=/usr/bin/chromedriver
     volumes:
       - ~/.m2:/root/.m2  # Mount local Maven repository to cache dependencies
+    entrypoint: >
+      sh -c "while ! nc -z selenium-hub 4444; do
+      echo 'Waiting for Selenium Hub...';
+      sleep 2;
+      done;
+      java $JAVA_OPTS -cp .:TestSelenium.jar test.TestSelenium"
