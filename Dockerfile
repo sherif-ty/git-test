@@ -4,10 +4,10 @@ FROM maven:3.8.4-openjdk-11-slim as build
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven project files into the container
+# Copy the entire project into the container
 COPY . /app
 
-# Build the project (which will download Selenium dependencies)
+# Run Maven to build the project (downloads dependencies, compiles, and runs tests)
 RUN mvn clean install
 
 # Run the tests (after the Maven build completes)
