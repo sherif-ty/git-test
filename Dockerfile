@@ -4,8 +4,7 @@ FROM openjdk:11
 # Set working directory
 WORKDIR /app
 
-# Ensure DNS resolution works
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
 
 # Install necessary tools for downloading files and compiling Java
 RUN apk update && apk add --no-cache curl bash
