@@ -21,7 +21,7 @@ services:
     build:
       context: .
     depends_on:
-      - selenium-hub
+      -  chrome-node
     environment:
       - JAVA_OPTS=-Dwebdriver.chrome.driver=/usr/bin/chromedriver
 
