@@ -24,6 +24,6 @@ services:
       -  chrome-node
     environment:
       - JAVA_OPTS=-Dwebdriver.chrome.driver=/usr/bin/chromedriver
-      dns:
-    - 8.8.8.8
+    dns:
+      - 8.8.8.8
 
